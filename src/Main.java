@@ -106,41 +106,66 @@ public class Main {
     }
 
     /**
-     * drawBoard() draws an empty board
+     * drawBoard()1 draws an empty board
      * @param g : Graphics
      */
     private static void drawBoard1(Graphics g)
     {
-        g.drawLine(0,0,0,300);
-        g.drawLine(100,0,100,300);
-        g.drawLine(200,0,200,300);
-        g.drawLine(300,0,300,300);
-        g.drawLine(0,0,300,0);
-        g.drawLine(0,300,300,300);
-        g.drawLine(0,100,300,100);
-        g.drawLine(0,200,300,200);
+        g.drawLine(0,0,0,600);
+        g.drawLine(60,0,60,600);
+        g.drawLine(120,0,120,600);
+        g.drawLine(180,0,180,600);
+        g.drawLine(240,0,240,600);
+        g.drawLine(300,0,300,600);
+        g.drawLine(360,0,360,600);
+        g.drawLine(420,0,420,600);
+        g.drawLine(480,0,480,600);
+        g.drawLine(540,0,540,600);
+        g.drawLine(600,0,600,600);
+        g.drawLine(0,0,600,0);
 
-        //for (int i = 0; i < )
-
-
+        g.drawLine(0,60,600,60);
+        g.drawLine(0,120,600,120);
+        g.drawLine(0,180,600,180);
+        g.drawLine(0,240,600,240);
+        g.drawLine(0,300,600,300);
+        g.drawLine(0,360,600,360);
+        g.drawLine(0,420,600,420);
+        g.drawLine(0,480,600,480);
+        g.drawLine(0,540,600,540);
+        g.drawLine(0,600,600,600);
     }
 
     /**
-     * drawBoard() draws an empty board
+     * drawBoard()1 draws an empty board
      * @param g : Graphics
      */
     private static void drawBoard2(Graphics g)
     {
-        g.drawLine(0,400,0,700);
-        g.drawLine(100,400,100,700);
-        g.drawLine(200,400,200,700);
-        g.drawLine(300,400,300,700);
-        g.drawLine(350,0,650,0);
-        g.drawLine(350,300,650,300);
-        g.drawLine(350,100,650,100);
-        g.drawLine(350,200,650,200);
-    }
+        g.drawLine(700,0,700,1300);
+        g.drawLine(760,0,760,1300);
+        g.drawLine(820,0,820,1300);
+        g.drawLine(880,0,880,1300);
+        g.drawLine(940,0,940,1300);
+        g.drawLine(1000,0,1000,1300);
+        g.drawLine(1060,0,1060,1300);
+        g.drawLine(1120,0,1120,1300);
+        g.drawLine(1180,0,1180,1300);
+        g.drawLine(1240,0,1240,1300);
+        g.drawLine(1300,0,1300,1300);
 
+        g.drawLine(700,0,1300,0);
+        g.drawLine(700,60,1300,60);
+        g.drawLine(700,120,1300,120);
+        g.drawLine(700,180,1300,180);
+        g.drawLine(700,240,1300,240);
+        g.drawLine(700,300,1300,300);
+        g.drawLine(700,360,1300,360);
+        g.drawLine(700,420,1300,420);
+        g.drawLine(700,480,1300,480);
+        g.drawLine(700,540,1300,540);
+        g.drawLine(700,600,1300,600);
+    }
     /**
      * Outputs the correct turn based on which move we are currently on
      * @param n : int placeholder for turn
