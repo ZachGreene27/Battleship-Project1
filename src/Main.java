@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.Scanner;
 
-import static java.lang.Math.abs;
 
 public class Main {
     final static int BOX_SIZE = 120;
