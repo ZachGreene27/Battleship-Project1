@@ -1,12 +1,12 @@
 import java.awt.*;
+import java.util.Scanner;
+
+import static java.lang.Math.abs;
 
 public class Main {
-    final static int BOX_SIZE = 30;
-    //0-300
-    //400-700
-    //10x10
+    final static int BOX_SIZE = 120;
     final static int WINDOW_SIZE1 = 1300;
-    final static int WINDOW_SIZE2 = 600;
+    final static int WINDOW_SIZE2 = 700;
     private static int moves;
     private static int turn;
     private static final int p1Turn = 1;
@@ -22,13 +22,13 @@ public class Main {
         board1 = new int [10][10];
         board2 = new int [10][10];
 
+
         DrawingPanel panel = new DrawingPanel(WINDOW_SIZE1, WINDOW_SIZE2);
         Graphics g = panel.getGraphics();
         drawBoard1(g);
         drawBoard2(g);
-        //drawBoard2(g);
         System.out.println("moves = " + moves);
-        g.drawString(outputTurn(p1Turn),100,350);
+        g.drawString(outputTurn(p1Turn),625,635);
         // Set the callback method for event mouseClick
         panel.onMouseClick(
                 (x, y) -> {
@@ -38,6 +38,15 @@ public class Main {
 
     }
 
+    /**
+     * isWinner() receives 2 parameters: the current turn,
+     *   and a reference to the board array. It should check
+     *   if all possible references of a boat having a floating piece
+     *   is true otherwise return false.
+     * @param turn : int, current turn (Player 1 or Player 2)
+     * @param board : int[][]
+     * @return  boolean
+     */
     private static boolean isWinner(int turn, int[][] board)
     {
         for (int i = 0; i < board.length; i++)
@@ -52,11 +61,42 @@ public class Main {
         }
         return true;
     }
-    private static void handleClick(Graphics g, int x, int y)
+    private static void handleClick(Graphics g, int x, int y)//0 =empty; 1=floating piece; -1 = sunk
+            //-2=miss
     {
+        int row, col;
+        // Obtain the row, col for the box clicked
+        row = y / BOX_SIZE;
+        col = x / BOX_SIZE;
+        // Obtain the coordinate of the box
+        int yTop = row * BOX_SIZE;
+        int xTop = col * BOX_SIZE;
+        // 1) If game is over then return back to main()
+        if (isGameOver)
+        {
+            return;
+        }
+        // 2) If the box is occupied, then return
+        if (board1[row][col] != 0  || board2[row][col] != 0)
+            return;
+
+
+        if (isWinner(turn,board1) || isWinner(turn,board2))
+        {
+            isGameOver = true;
+            g.setColor(Color.WHITE);
+            g.fillRect(560,603,275,175);
+            g.setColor(Color.BLACK);
+            g.drawString("Game over!",625,635);
+            g.drawString("Player " + turn + " is the winner!!!",605,655);
+        }
 
     }
 
+    /**
+     * changeTurn() changes value of turn from PLayer 1 to Player 2
+     * and from Player 1 to PLayer 2
+     */
     private static void changeTurn() {
 
         if (moves % 2 + 1 == 1)
@@ -69,6 +109,11 @@ public class Main {
         }
 
     }
+
+    /**
+     * drawBoard()1 draws an empty board
+     * @param g : Graphics
+     */
     private static void drawBoard1(Graphics g)
     {
         g.drawLine(0,0,0,600);
@@ -96,19 +141,23 @@ public class Main {
         g.drawLine(0,600,600,600);
     }
 
+    /**
+     * drawBoard()1 draws an empty board
+     * @param g : Graphics
+     */
     private static void drawBoard2(Graphics g)
     {
-        g.drawLine(700,0,700,1300);
-        g.drawLine(760,0,760,1300);
-        g.drawLine(820,0,820,1300);
-        g.drawLine(880,0,880,1300);
-        g.drawLine(940,0,940,1300);
-        g.drawLine(1000,0,1000,1300);
-        g.drawLine(1060,0,1060,1300);
-        g.drawLine(1120,0,1120,1300);
-        g.drawLine(1180,0,1180,1300);
-        g.drawLine(1240,0,1240,1300);
-        g.drawLine(1300,0,1300,1300);
+        g.drawLine(700,0,700,600);
+        g.drawLine(760,0,760,600);
+        g.drawLine(820,0,820,600);
+        g.drawLine(880,0,880,600);
+        g.drawLine(940,0,940,600);
+        g.drawLine(1000,0,1000,600);
+        g.drawLine(1060,0,1060,600);
+        g.drawLine(1120,0,1120,600);
+        g.drawLine(1180,0,1180,600);
+        g.drawLine(1240,0,1240,600);
+        g.drawLine(1300,0,1300,600);
 
         g.drawLine(700,0,1300,0);
         g.drawLine(700,60,1300,60);
@@ -122,7 +171,11 @@ public class Main {
         g.drawLine(700,540,1300,540);
         g.drawLine(700,600,1300,600);
     }
-
+    /**
+     * Outputs the correct turn based on which move we are currently on
+     * @param n : int placeholder for turn
+     * @return : String allows us to return a string to put onto the screen where our board is
+     */
     public static String outputTurn(int n)
     {
         if (n % 2 == 1)
@@ -131,6 +184,41 @@ public class Main {
         }
         else
             return ("Player 2: Your turn");
+    }
+
+    public static void setShipsLoc(){
+        Scanner scan= new Scanner(System.in);
+        for (int n=1; n<=2; n++) {
+            System.out.println("Hi player"+n);
+            for (int s = 1; s <= 3; s++) {
+                System.out.println("Where you want to set your ship" + s + "?");
+                System.out.println("Please provide the x coordinate and y coordinate of the start point");
+                int xlocS = scan.nextInt();
+                int ylocS = scan.nextInt();
+                System.out.println("Please provide the x coordinate and y coordinate of the end point");
+                int xlocE = scan.nextInt();
+                int ylocE = scan.nextInt();
+                board1[xlocE][ylocE] = 1;
+                if (xlocS == xlocE && ylocE > ylocS) {
+                    for (int i = ylocS; i <= ylocE; i++) {
+                        board1[xlocE][i] = 1;
+                    }
+                } else if (xlocS == xlocE && ylocE < ylocS) {
+                    for (int i = ylocE; i <= ylocS; i++) {
+                        board1[xlocE][i] = 1;
+                    }
+                } else if (ylocS == ylocE && xlocE > xlocS) {
+                    for (int i = xlocS; i <= xlocE; i++) {
+                        board1[i][ylocE] = 1;
+                    }
+                } else if (ylocS == ylocE && xlocE < xlocS) {
+                    for (int i = xlocE; i <= xlocS; i++) {
+                        board1[i][ylocE] = 1;
+                    }
+                }
+
+            }
+        }
     }
 
 }
