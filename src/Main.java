@@ -114,6 +114,7 @@ public class Main {
      * @param g : Graphics
      */
     private static void drawBoard1(Graphics g)
+
     {
         g.drawLine(0,0,0,600);
         g.drawLine(60,0,60,600);
