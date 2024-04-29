@@ -32,7 +32,7 @@ public class Main {
         System.out.println("Hi Player 2");
         setShipsLoc(board2);
         System.out.println("moves = " + moves);
-        g.drawString(outputTurn(p1Turn), 625, 635);
+        g.drawString(outputTurn(turn), 625, 635);
         // Set the callback method for event mouseClick
         panel.onMouseClick(
                 (x, y) -> {
@@ -64,8 +64,8 @@ public class Main {
         return true;
     }
 
-    private static void handleClick(Graphics g, int x, int y)//0 =empty; 1=floating piece; -1 = sunk
-    //-2=miss
+    private static void handleClick(Graphics g, int x, int y)
+    //0 =empty; 1=floating piece; -1 = sunk, -2=miss
     {
         int row, col;
         // Obtain the row, col for the box clicked
@@ -84,6 +84,7 @@ public class Main {
             g.fillRect(560, 603, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Miss!", 625, 635);
+            g.drawString("Player 2 it's your turn!", 625, 655);
             board1[row][col] = -2;
             g.setColor(Color.BLUE);
             g.fillRect(xTop, yTop, BOX_SIZE, BOX_SIZE);
@@ -94,6 +95,7 @@ public class Main {
             g.fillRect(560, 603, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Miss!", 625, 635);
+            g.drawString("Player 1 it's your turn!", 625, 655);
             board2[row][col] = -2;
             g.setColor(Color.BLUE);
             g.fillRect(xTop, yTop, BOX_SIZE, BOX_SIZE);
@@ -105,6 +107,7 @@ public class Main {
             g.fillRect(560, 603, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Hit!", 625, 635);
+            g.drawString("Player 2 it's your turn!", 625, 655);
             board1[row][col] = -1;
             g.setColor(Color.RED);
             g.fillRect(xTop, yTop, BOX_SIZE, BOX_SIZE);
@@ -114,6 +117,7 @@ public class Main {
             g.fillRect(560, 603, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Hit!", 625, 635);
+            g.drawString("Player 1 it's your turn!", 625, 655);
             board2[row][col] = -1;
             g.setColor(Color.RED);
             g.fillRect(xTop, yTop, BOX_SIZE, BOX_SIZE);
@@ -137,9 +141,9 @@ public class Main {
     private static void changeTurn() {
 
         if (moves % 2 + 1 == 1) {
-            turn = p1Turn;
-        } else {
             turn = p2Turn;
+        } else {
+            turn = p1Turn;
         }
 
     }
