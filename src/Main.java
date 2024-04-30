@@ -543,7 +543,7 @@ public class Main {
         }
         System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
         answer = kb.next();
-        while(answer == "y")
+        while(answer.equalsIgnoreCase("y"))
         {
             System.out.println("Which ship would you like to check? Please put the ship number. Player 1 your ships are 1-5 and Player 2 your ships are 6-10.");
             n = kb.nextInt();
@@ -586,6 +586,10 @@ public class Main {
             else if (n == 10)
             {
                 System.out.println(ship52.getLocation());
+            }
+            if (answer.equalsIgnoreCase("n"))
+            {
+                break;
             }
             System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
             answer = kb.next();
