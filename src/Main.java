@@ -13,53 +13,23 @@ public class Main {
     private static int[][] board1;
     private static int[][] board2;
     private static boolean isGameOver;
-    public static int xlocS1;
-    public static int xlocS2;
-    public static int xlocS3;
-    public static int xlocS4;
-    public static int xlocS5;
+    public static int xlocS1,xlocS2,xlocS3, xlocS4,xlocS5;
 
-    public static int ylocS1;
-    public static int ylocS2;
-    public static int ylocS3;
-    public static int ylocS4;
-    public static int ylocS5;
+    public static int ylocS1,ylocS2,ylocS3,ylocS4,ylocS5;
 
-    public static int xlocE1;
-    public static int xlocE2;
-    public static int xlocE3;
-    public static int xlocE4;
-    public static int xlocE5;
+    public static int xlocE1,xlocE2,xlocE3,xlocE4,xlocE5;
 
-    public static int ylocE1;
-    public static int ylocE2;
-    public static int ylocE3;
-    public static int ylocE4;
-    public static int ylocE5;
+    public static int ylocE1,ylocE2,ylocE3,ylocE4,ylocE5;
 
-    public static int xlocS12;
-    public static int xlocS22;
-    public static int xlocS32;
-    public static int xlocS42;
-    public static int xlocS52;
+    public static int xlocS12,xlocS22,xlocS32,xlocS42,xlocS52;
 
-    public static int ylocS12;
-    public static int ylocS22;
-    public static int ylocS32;
-    public static int ylocS42;
-    public static int ylocS52;
+    public static int ylocS12,ylocS22,ylocS32,ylocS42,ylocS52;
 
-    public static int xlocE12;
-    public static int xlocE22;
-    public static int xlocE32;
-    public static int xlocE42;
-    public static int xlocE52;
+    public static int xlocE12,xlocE22,xlocE32,xlocE42,xlocE52;
 
-    public static int ylocE12;
-    public static int ylocE22;
-    public static int ylocE32;
-    public static int ylocE42;
-    public static int ylocE52;
+    public static int ylocE12,ylocE22,ylocE32,ylocE42,ylocE52;
+
+    private static Ship ship1,ship2,ship3,ship4,ship5,ship12,ship22,ship32,ship42,ship52;
 
 
 
@@ -90,11 +60,11 @@ public class Main {
         getShipsLoc5();
         setShipLoc(board1, xlocE5, xlocS5, ylocE5, ylocS5);
 
-        Ship ship1 = new Ship(xlocS1,ylocS1,xlocE1,ylocE1,"Ship1",1);
-        Ship ship2 = new Ship(xlocS2,ylocS2,xlocE2,ylocE2,"Ship2",2);
-        Ship ship3 = new Ship(xlocS3,ylocS3,xlocE3,ylocE3,"Ship3",3);
-        Ship ship4 = new Ship(xlocS4,ylocS4,xlocE4,ylocE4,"Ship4",4);
-        Ship ship5 = new Ship(xlocS5,ylocS5,xlocE5,ylocE5,"Ship5",5);
+         ship1 = new Ship(xlocS1,ylocS1,xlocE1,ylocE1,"Ship1",1);
+         ship2 = new Ship(xlocS2,ylocS2,xlocE2,ylocE2,"Ship2",2);
+         ship3 = new Ship(xlocS3,ylocS3,xlocE3,ylocE3,"Ship3",3);
+         ship4 = new Ship(xlocS4,ylocS4,xlocE4,ylocE4,"Ship4",4);
+         ship5 = new Ship(xlocS5,ylocS5,xlocE5,ylocE5,"Ship5",5);
 
         for (int c= 0; c<6; c++) {
             System.out.println("/////////////////");
@@ -113,65 +83,15 @@ public class Main {
         getShipsLoc52();
         setShipLoc(board2, xlocE52, xlocS52, ylocE52, ylocS52);
 
-        Ship ship12 = new Ship(xlocS12,ylocS12,xlocE12,ylocE12,"Ship12",6);
-        Ship ship22 = new Ship(xlocS22,ylocS22,xlocE22,ylocE22,"Ship22",7);
-        Ship ship32 = new Ship(xlocS32,ylocS32,xlocE32,ylocE32,"Ship32",8);
-        Ship ship42 = new Ship(xlocS42,ylocS42,xlocE42,ylocE42,"Ship42",9);
-        Ship ship52 = new Ship(xlocS52,ylocS52,xlocE52,ylocE52,"Ship52",10);
+         ship12 = new Ship(xlocS12,ylocS12,xlocE12,ylocE12,"Ship12",6);
+         ship22 = new Ship(xlocS22,ylocS22,xlocE22,ylocE22,"Ship22",7);
+         ship32 = new Ship(xlocS32,ylocS32,xlocE32,ylocE32,"Ship32",8);
+         ship42 = new Ship(xlocS42,ylocS42,xlocE42,ylocE42,"Ship42",9);
+         ship52 = new Ship(xlocS52,ylocS52,xlocE52,ylocE52,"Ship52",10);
 
         for (int c= 0; c<6; c++) {
             System.out.println("/////////////////");
         }
-
-        Scanner kb = new Scanner (System.in);
-        System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
-        while(kb.next() == "y")
-        {
-            System.out.println("Which ship would you like to check? Please put the ship number. Player 1 your ships are 1-5 and Player 2 your ships are 6-10.");
-            int n = kb.nextInt();
-            if (n == 1)
-            {
-                System.out.println(ship1.getLocation());
-            }
-            else if (n == 2)
-            {
-                System.out.println(ship2.getLocation());
-            }
-            else if (n == 3)
-            {
-                System.out.println(ship3.getLocation());
-            }
-            else if (n == 4)
-            {
-                System.out.println(ship4.getLocation());
-            }
-            else if (n == 5)
-            {
-                System.out.println(ship5.getLocation());
-            }
-            else if (n == 6)
-            {
-                System.out.println(ship12.getLocation());
-            }
-            else if (n == 7)
-            {
-                System.out.println(ship22.getLocation());
-            }
-            else if (n == 8)
-            {
-                System.out.println(ship32.getLocation());
-            }
-            else if (n == 9)
-            {
-                System.out.println(ship42.getLocation());
-            }
-            else if (n == 10)
-            {
-                System.out.println(ship52.getLocation());
-            }
-
-        }
-
         // Set the callback method for event mouseClick
         panel.onMouseClick(
                 (x, y) -> {
@@ -219,6 +139,7 @@ public class Main {
         // Obtain the coordinate of the box
         int yTop = row * BOX_SIZE;
         int xTop = col * BOX_SIZE;
+        moves++;
         // 1) If game is over then return back to main()
         if (isGameOver) {
             return;
@@ -256,6 +177,14 @@ public class Main {
             g.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
+        Scanner kb = new Scanner (System.in);
+        System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
+        if(kb.next() == "y")
+        {
+            getPosition();
+        }
+
+
     }
     private static void handleClick2(Graphics m, int x, int y)
     //0 =empty; 1=floating piece; -1 = sunk, -2=miss
@@ -267,6 +196,7 @@ public class Main {
         // Obtain the coordinate of the box
         int yTop = row * BOX_SIZE;
         int xTop = col * BOX_SIZE;
+        moves++;
         // 1) If game is over then return back to main()
         if (isGameOver) {
             return;
@@ -303,6 +233,13 @@ public class Main {
             m.setColor(Color.BLACK);
             m.drawString("Game over!", 280, 650);
             m.drawString("Player " + turn + " is the winner!!!", 250, 670);
+        }
+
+        Scanner kb = new Scanner (System.in);
+        System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
+        if(kb.next().equals("y"))
+        {
+            getPosition();
         }
 
     }
@@ -351,6 +288,11 @@ public class Main {
         g.drawString("Hello Player 1", 260, 620);
     }
 
+    /**
+     * drawBoard()2 draws an empty board
+     *
+     * @param m : Graphics
+     */
     private static void drawBoard2(Graphics m) {
         m.drawLine(0, 0, 0, 600);
         m.drawLine(60, 0, 60, 600);
@@ -379,18 +321,6 @@ public class Main {
     }
 
 
-    /**
-     * drawBoard()1 draws an empty board
-     *
-     * @param g : Graphics
-     */
-
-    /**
-     * Outputs the correct turn based on which move we are currently on
-     *
-     * @param  : int placeholder for turn
-     * @return : String allows us to return a string to put onto the screen where our board is
-     */
 
     public static void setShipLoc(int board [][], int xlocE, int xlocS, int ylocE, int ylocS){
         if (xlocS == xlocE && ylocE > ylocS) {
@@ -409,6 +339,10 @@ public class Main {
             for (int i = xlocE; i <= xlocS; i++) {
                 board[i][ylocE] = 1;
             }
+        }
+        else if( xlocE == xlocS)
+        {
+            board[xlocS][ylocS] = 1;
         }
         for (int i = 0; i<board.length; i++) {
             for (int j=0; j<board.length; j++) {
@@ -559,6 +493,105 @@ public class Main {
         xlocE52 = scan.nextInt() - 1;
         System.out.println("and y coordinate");
         ylocE52 = scan.nextInt() - 1;
+    }
+
+    public static void getPosition()
+    {
+        String answer;
+        Scanner kb = new Scanner (System.in);
+        System.out.println("Which ship would you like to check? Please put the ship number. Player 1 your ships are 1-5 and Player 2 your ships are 6-10.");
+        int n = kb.nextInt();
+        if (n == 1)
+        {
+            System.out.println(ship1.getLocation());
+        }
+        else if (n == 2)
+        {
+            System.out.println(ship2.getLocation());
+        }
+        else if (n == 3)
+        {
+            System.out.println(ship3.getLocation());
+        }
+        else if (n == 4)
+        {
+            System.out.println(ship4.getLocation());
+        }
+        else if (n == 5)
+        {
+            System.out.println(ship5.getLocation());
+        }
+        else if (n == 6)
+        {
+            System.out.println(ship12.getLocation());
+        }
+        else if (n == 7)
+        {
+            System.out.println(ship22.getLocation());
+        }
+        else if (n == 8)
+        {
+            System.out.println(ship32.getLocation());
+        }
+        else if (n == 9)
+        {
+            System.out.println(ship42.getLocation());
+        }
+        else if (n == 10)
+        {
+            System.out.println(ship52.getLocation());
+        }
+        System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
+        answer = kb.next();
+        while(answer == "y")
+        {
+            System.out.println("Which ship would you like to check? Please put the ship number. Player 1 your ships are 1-5 and Player 2 your ships are 6-10.");
+            n = kb.nextInt();
+            if (n == 1)
+            {
+                System.out.println(ship1.getLocation());
+            }
+            else if (n == 2)
+            {
+                System.out.println(ship2.getLocation());
+            }
+            else if (n == 3)
+            {
+                System.out.println(ship3.getLocation());
+            }
+            else if (n == 4)
+            {
+                System.out.println(ship4.getLocation());
+            }
+            else if (n == 5)
+            {
+                System.out.println(ship5.getLocation());
+            }
+            else if (n == 6)
+            {
+                System.out.println(ship12.getLocation());
+            }
+            else if (n == 7)
+            {
+                System.out.println(ship22.getLocation());
+            }
+            else if (n == 8)
+            {
+                System.out.println(ship32.getLocation());
+            }
+            else if (n == 9)
+            {
+                System.out.println(ship42.getLocation());
+            }
+            else if (n == 10)
+            {
+                System.out.println(ship52.getLocation());
+            }
+            System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
+            answer = kb.next();
+        }
+
+
     }
 
 
