@@ -179,7 +179,7 @@ public class Main {
 
         Scanner kb = new Scanner (System.in);
         System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
-        if(kb.next() == "y")
+        if(kb.next().equals("y"))
         {
             getPosition();
         }
