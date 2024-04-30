@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -14,6 +13,56 @@ public class Main {
     private static int[][] board1;
     private static int[][] board2;
     private static boolean isGameOver;
+    public static int xlocS1;
+    public static int xlocS2;
+    public static int xlocS3;
+    public static int xlocS4;
+    public static int xlocS5;
+
+    public static int ylocS1;
+    public static int ylocS2;
+    public static int ylocS3;
+    public static int ylocS4;
+    public static int ylocS5;
+
+    public static int xlocE1;
+    public static int xlocE2;
+    public static int xlocE3;
+    public static int xlocE4;
+    public static int xlocE5;
+
+    public static int ylocE1;
+    public static int ylocE2;
+    public static int ylocE3;
+    public static int ylocE4;
+    public static int ylocE5;
+
+    public static int xlocS12;
+    public static int xlocS22;
+    public static int xlocS32;
+    public static int xlocS42;
+    public static int xlocS52;
+
+    public static int ylocS12;
+    public static int ylocS22;
+    public static int ylocS32;
+    public static int ylocS42;
+    public static int ylocS52;
+
+    public static int xlocE12;
+    public static int xlocE22;
+    public static int xlocE32;
+    public static int xlocE42;
+    public static int xlocE52;
+
+    public static int ylocE12;
+    public static int ylocE22;
+    public static int ylocE32;
+    public static int ylocE42;
+    public static int ylocE52;
+
+
+
 
     public static void main(String[] args) {
         moves = 0;
@@ -30,10 +79,37 @@ public class Main {
         drawBoard1(g);
         drawBoard2(m);
         System.out.println("Hi Player 1");
-        setShipsLoc(board1,1);
+        getShipsLoc1();
+        setShipLoc(board1, xlocE1, xlocS1, ylocE1, ylocS1);
+        getShipsLoc2();
+        setShipLoc(board1, xlocE2, xlocS2, ylocE2, ylocS2);
+        getShipsLoc3();
+        setShipLoc(board1, xlocE3, xlocS3, ylocE3, ylocS3);
+        getShipsLoc4();
+        setShipLoc(board1, xlocE4, xlocS4, ylocE4, ylocS4);
+        getShipsLoc5();
+        setShipLoc(board1, xlocE5, xlocS5, ylocE5, ylocS5);
+
+        for (int c= 0; c<6; c++) {
+            System.out.println("/////////////////");
+        }
+
         System.out.println("Hi Player 2");
-        setShipsLoc(board2,1);
-        System.out.println("moves = " + moves);
+        getShipsLoc12();
+        setShipLoc(board2, xlocE12, xlocS12, ylocE12, ylocS12);
+        getShipsLoc22();
+        setShipLoc(board2, xlocE22, xlocS22, ylocE22, ylocS22);
+        getShipsLoc32();
+        setShipLoc(board2, xlocE32, xlocS32, ylocE32, ylocS32);
+        getShipsLoc42();
+        setShipLoc(board2, xlocE42, xlocS42, ylocE42, ylocS42);
+        getShipsLoc52();
+        setShipLoc(board2, xlocE52, xlocS52, ylocE52, ylocS52);
+
+        for (int c= 0; c<6; c++) {
+            System.out.println("/////////////////");
+        }
+
         // Set the callback method for event mouseClick
         panel.onMouseClick(
                 (x, y) -> {
@@ -88,7 +164,7 @@ public class Main {
         // 2) If the box is empty, print miss
         if (board1[row][col] == 0) {
             g.setColor(Color.WHITE);
-            g.fillRect(280, 620, 275, 175);
+            g.fillRect(280, 635, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Miss!", 280, 650);
             g.drawString("Player 2 it's your turn!", 280, 670);
@@ -100,7 +176,7 @@ public class Main {
         // 3) If there is a floating boat on the box, print hit
         if (board1[row][col] == 1) {
             g.setColor(Color.WHITE);
-            g.fillRect(280, 620, 275, 175);
+            g.fillRect(280, 635, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Hit!", 280, 650);
             g.drawString("Player 2 it's your turn!", 280, 670);
@@ -112,10 +188,10 @@ public class Main {
         if (isWinner(turn, board1) || isWinner(turn, board2)) {
             isGameOver = true;
             g.setColor(Color.WHITE);
-            g.fillRect(280, 620, 275, 175);
+            g.fillRect(200, 635, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Game over!", 280, 650);
-            g.drawString("Player " + turn + " is the winner!!!", 300, 670);
+            g.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
     }
@@ -135,8 +211,8 @@ public class Main {
         }
         // 2) If the box is empty, print miss
         if (board2[row][col] == 0) {
-            m.setColor(Color.WHITE);
-            m.fillRect(280, 620, 275, 175);
+            m.setColor(Color.white);
+            m.fillRect(280, 635, 275, 175);
             m.setColor(Color.BLACK);
             m.drawString("Miss!", 280, 650);
             m.drawString("Player 1 it's your turn!", 280, 670);
@@ -149,7 +225,7 @@ public class Main {
 
         if (board2[row][col] == 1) {
             m.setColor(Color.WHITE);
-            m.fillRect(280, 620, 275, 175);
+            m.fillRect(280, 635, 275, 175);
             m.setColor(Color.BLACK);
             m.drawString("Hit!", 280, 650);
             m.drawString("Player 1 it's your turn!", 280, 670);
@@ -161,10 +237,10 @@ public class Main {
         if (isWinner(turn, board1) || isWinner(turn, board2)) {
             isGameOver = true;
             m.setColor(Color.WHITE);
-            m.fillRect(280, 650, 275, 175);
+            m.fillRect(200, 635, 275, 175);
             m.setColor(Color.BLACK);
             m.drawString("Game over!", 280, 650);
-            m.drawString("Player " + turn + " is the winner!!!", 300, 670);
+            m.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
     }
@@ -172,9 +248,9 @@ public class Main {
      * changeTurn() changes value of turn from PLayer 1 to Player 2
      * and from Player 1 to PLayer 2
      */
-  private static void changeTurn() {
-   if (moves % 2 + 1 == 1) {
-           turn = p2Turn;
+    private static void changeTurn() {
+        if (moves % 2 + 1 == 1) {
+            turn = p2Turn;
         } else {
             turn = p1Turn;
         }
@@ -250,53 +326,172 @@ public class Main {
     /**
      * Outputs the correct turn based on which move we are currently on
      *
-     * @param : int placeholder for turn
+     * @param  : int placeholder for turn
      * @return : String allows us to return a string to put onto the screen where our board is
      */
 
-    public static void setShipsLoc(int board[][],int s) {
+    public static void setShipLoc(int board [][], int xlocE, int xlocS, int ylocE, int ylocS){
+        if (xlocS == xlocE && ylocE > ylocS) {
+            for (int i = ylocS; i <= ylocE; i++) {
+                board[xlocE][i] = 1;
+            }
+        } else if (xlocS == xlocE && ylocE < ylocS) {
+            for (int i = ylocE; i <= ylocS; i++) {
+                board[xlocE][i] = 1;
+            }
+        } else if (ylocS == ylocE && xlocE > xlocS) {
+            for (int i = xlocS; i <= xlocE; i++) {
+                board[i][ylocE] = 1;
+            }
+        } else if (ylocS == ylocE && xlocE < xlocS) {
+            for (int i = xlocE; i <= xlocS; i++) {
+                board[i][ylocE] = 1;
+            }
+        }
+        for (int i = 0; i<board.length; i++) {
+            for (int j=0; j<board.length; j++) {
+                System.out.print(board[i][j]+ " ");
+            }
+            System.out.println(" ");
+        }
+    }
+
+    public static void getShipsLoc1() {
         Scanner scan = new Scanner(System.in);
-                System.out.println("Where you want to set your ship" + s + "?");
-                System.out.println("Please provide the x coordinate of the start point");
-                int xlocS = scan.nextInt() - 1;
-                System.out.println("and y coordinate");
-                int ylocS = scan.nextInt() - 1;
-                System.out.println("Please provide the x coordinate of the end point");
-                int xlocE = scan.nextInt() - 1;
-                System.out.println("and y coordinate");
-                int ylocE = scan.nextInt() - 1;
-                if (xlocS == xlocE && ylocE > ylocS) {
-                    for (int i = ylocS; i <= ylocE; i++) {
-                        board[xlocE][i] = 1;
-                    }
-                } else if (xlocS == xlocE && ylocE < ylocS) {
-                    for (int i = ylocE; i <= ylocS; i++) {
-                        board[xlocE][i] = 1;
-                    }
-                } else if (ylocS == ylocE && xlocE > xlocS) {
-                    for (int i = xlocS; i <= xlocE; i++) {
-                        board[i][ylocE] = 1;
-                    }
-                } else if (ylocS == ylocE && xlocE < xlocS) {
-                    for (int i = xlocE; i <= xlocS; i++) {
-                        board[i][ylocE] = 1;
-                    }
-                }
-                for (int i = 0; i<board.length; i++) {
-                    for (int j=0; j<board.length; j++) {
-                        System.out.print(board[i][j]+ " ");
-                    }
-                    System.out.println(" ");
-                }
+        System.out.println("Please create ship 1 of size 1.");
+        System.out.println("Where you want to set your ship 1?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS1 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS1 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE1 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE1 = scan.nextInt() - 1;
+    }
 
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
-        System.out.println("/////////////////");
 
+    public static void getShipsLoc2() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 2 of size 2.");
+        System.out.println("Where you want to set your ship 2?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS2 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS2 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE2 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE2 = scan.nextInt() - 1;
+    }
+
+    public static void getShipsLoc3() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 3 of size 3.");
+        System.out.println("Where you want to set your ship 3?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS3 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS3 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE3 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE3 = scan.nextInt() - 1;
+
+    }
+    public static void getShipsLoc4() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 4 of size 4.");
+        System.out.println("Where you want to set your ship 4?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS4 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS4 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE4 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE4 = scan.nextInt() - 1;
+    }
+    public static void getShipsLoc5() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 5 of size 5.");
+        System.out.println("Where you want to set your ship 5?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS5 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS5 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE5 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE5 = scan.nextInt() - 1;
+    }
+    public static void getShipsLoc12() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 1 of size 1.");
+        System.out.println("Where you want to set your ship 1?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS12 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS12 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE12 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE12 = scan.nextInt() - 1;
+    }
+
+
+    public static void getShipsLoc22() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 2 of size 2.");
+        System.out.println("Where you want to set your ship 2?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS22 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS22 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE22 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE22 = scan.nextInt() - 1;
+    }
+
+    public static void getShipsLoc32() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 3 of size 3.");
+        System.out.println("Where you want to set your ship 3?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS32 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS32 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE32 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE32 = scan.nextInt() - 1;
+
+    }
+    public static void getShipsLoc42() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 4 of size 4.");
+        System.out.println("Where you want to set your ship 4?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS42 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS42 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE42 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE42 = scan.nextInt() - 1;
+    }
+    public static void getShipsLoc52() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please create ship 5 of size 5.");
+        System.out.println("Where you want to set your ship 5?");
+        System.out.println("Please provide the x coordinate of the start point");
+        xlocS52 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocS52 = scan.nextInt() - 1;
+        System.out.println("Please provide the x coordinate of the end point");
+        xlocE52 = scan.nextInt() - 1;
+        System.out.println("and y coordinate");
+        ylocE52 = scan.nextInt() - 1;
     }
 }
