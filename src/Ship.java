@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
 public class Ship {
-        //ArrayList<Integer> Xshop = new ArrayList<>();
-       // ArrayList<Integer> Yshop = new ArrayList<>();
         String name;
 
         int xloc1, xloc2, yloc1, yloc2,n;
@@ -70,8 +68,8 @@ public class Ship {
 
         public String getLocation()
         {
-                String firstBlock = "Your ship has a starting block at the location of " + xloc1 + ", " + yloc1;
-                String endBlock = "and your ship has an ending at " + xloc2 + ", " + yloc2;
+                String firstBlock = "Your ship has a starting block at the location of " + (xloc1+1) + ", " + (yloc1+1);
+                String endBlock = " and your ship has an ending at " + (xloc2+1) + ", " + (yloc2+1);
                 return firstBlock + endBlock;
         }
 }
