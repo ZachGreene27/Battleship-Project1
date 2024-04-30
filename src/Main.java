@@ -591,12 +591,11 @@ public class Main {
             {
                 break;
             }
+            for (int c= 0; c<8; c++) {
+                System.out.println("/////////////////");
+            }
             System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
             answer = kb.next();
         }
-
-
     }
-
-
 }
