@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -57,7 +56,11 @@ public class Main {
         System.out.println("Please create ship5 of size 5.");
         setShipsLoc(board2,5);
         System.out.println("moves = " + moves);
-       
+
+        for (int c= 0; c<6; c++) {
+            System.out.println("/////////////////");
+        }
+
         // Set the callback method for event mouseClick
         panel.onMouseClick(
                 (x, y) -> {
@@ -112,7 +115,7 @@ public class Main {
         // 2) If the box is empty, print miss
         if (board1[row][col] == 0) {
             g.setColor(Color.WHITE);
-            g.fillRect(280, 620, 275, 175);
+            g.fillRect(280, 635, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Miss!", 280, 650);
             g.drawString("Player 2 it's your turn!", 280, 670);
@@ -124,7 +127,7 @@ public class Main {
         // 3) If there is a floating boat on the box, print hit
         if (board1[row][col] == 1) {
             g.setColor(Color.WHITE);
-            g.fillRect(280, 620, 275, 175);
+            g.fillRect(280, 635, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Hit!", 280, 650);
             g.drawString("Player 2 it's your turn!", 280, 670);
@@ -136,10 +139,10 @@ public class Main {
         if (isWinner(turn, board1) || isWinner(turn, board2)) {
             isGameOver = true;
             g.setColor(Color.WHITE);
-            g.fillRect(280, 620, 275, 175);
+            g.fillRect(200, 635, 275, 175);
             g.setColor(Color.BLACK);
             g.drawString("Game over!", 280, 650);
-            g.drawString("Player " + turn + " is the winner!!!", 300, 670);
+            g.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
     }
@@ -159,8 +162,8 @@ public class Main {
         }
         // 2) If the box is empty, print miss
         if (board2[row][col] == 0) {
-            m.setColor(Color.WHITE);
-            m.fillRect(280, 620, 275, 175);
+            m.setColor(Color.white);
+            m.fillRect(280, 635, 275, 175);
             m.setColor(Color.BLACK);
             m.drawString("Miss!", 280, 650);
             m.drawString("Player 1 it's your turn!", 280, 670);
@@ -173,7 +176,7 @@ public class Main {
 
         if (board2[row][col] == 1) {
             m.setColor(Color.WHITE);
-            m.fillRect(280, 620, 275, 175);
+            m.fillRect(280, 635, 275, 175);
             m.setColor(Color.BLACK);
             m.drawString("Hit!", 280, 650);
             m.drawString("Player 1 it's your turn!", 280, 670);
@@ -185,10 +188,10 @@ public class Main {
         if (isWinner(turn, board1) || isWinner(turn, board2)) {
             isGameOver = true;
             m.setColor(Color.WHITE);
-            m.fillRect(280, 650, 275, 175);
+            m.fillRect(200, 635, 275, 175);
             m.setColor(Color.BLACK);
             m.drawString("Game over!", 280, 650);
-            m.drawString("Player " + turn + " is the winner!!!", 300, 670);
+            m.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
     }
@@ -277,12 +280,7 @@ public class Main {
      * @param  : int placeholder for turn
      * @return : String allows us to return a string to put onto the screen where our board is
      */
-    //public static String outputTurn(int n) {
-    //if (n % 2 == 1) {
-    //  return ("Player 1: Your turn");
-    // } else
-    // return ("Player 2: Your turn");
-    //}
+ 
 
     public static void setShipsLoc(int board[][], int s) {
         Scanner scan = new Scanner(System.in);
