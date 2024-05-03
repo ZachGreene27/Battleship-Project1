@@ -1,12 +1,21 @@
+/**
+ * @file Main.java
+ * @brief The biggest issue was figuring out what methods we wanted this class to hold
+ * @author Zachary Greene
+ * @date: May 3, 2024
+ * @acknowledgement: Hongyun Peng
+ */
+
 import java.util.ArrayList;
 
 public class Ship {
         String name;
 
+        // Setup for each of the important variables
         int xloc1, xloc2, yloc1, yloc2,n;
 
 
-        public Ship(int x1, int y1, int x2, int y2, String name, int n)
+        public Ship(int x1, int y1, int x2, int y2, String name, int n) // Initializing all of the needed identifiers and values
         {
                 this.n = n;
                 this.xloc1 = x1;
@@ -16,56 +25,8 @@ public class Ship {
                 this.name = name;
 
         }
-//
-//        public void setShip(int n, int x1, int y1, int x2, int y2, String name)
-//        {
-//                if (n == 1)
-//                {
-//                        Xshop.add(x1);
-//                        Yshop.add(y1);
-//                }
-//                else if (n == 2)
-//                {
-//                        Xshop.add(x1);
-//                        Xshop.add(x2);
-//                        Yshop.add(y1);
-//                        Yshop.add(y2);
-//
-//                }
-//                else
-//                {
-//                        if (x1 == x2)
-//                        {
-//                                for (int i = 0; i < n; i++)
-//                                {
-//                                        Xshop.add(x1);
-//                                }
-//                        }
-//                        else
-//                        {
-//                                for (int i = x1; i <= x2; i++)
-//                                {
-//                                        Xshop.add(i);
-//                                }
-//                        }
-//
-//                        if (y1 == y2)
-//                        {
-//                                for (int i = 0; i < n; i++)
-//                                {
-//                                        Yshop.add(y1);
-//                                }
-//                        }
-//                        else
-//                        {
-//                                for (int i = y1; i <= y2; i++)
-//                                {
-//                                        Yshop.add(i);
-//                                }
-//                        }
-//                }
-//        }
 
+        // Gets and returns the location of the ending and starting block for a ship
         public String getLocation()
         {
                 String firstBlock = "Your ship has a starting block at the location of " + (xloc1+1) + ", " + (yloc1+1);
