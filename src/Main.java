@@ -1,3 +1,11 @@
+/**
+ * @file Main.java
+ * @brief The largest issue was in figuring out how to deal with the extra Ship class and implement it well
+ * @author Zachary Greene
+ * @date: May 3, 2024
+ * @acknowledgement: Hongyun Peng
+ */
+
 import java.awt.*;
 import java.util.Scanner;
 
@@ -35,19 +43,22 @@ public class Main {
 
 
     public static void main(String[] args) {
+        // Set up some variables to discern turns
         moves = 0;
         turn = 1;
         isGameOver = false;
+        // Set up the board for each player
         board1 = new int[10][10];
         board2 = new int[10][10];
 
-
+        // Making the drawing panels and the graphics with which to draw
         DrawingPanel panel = new DrawingPanel(WINDOW_SIZE1, WINDOW_SIZE2);
         DrawingPanel panel2 = new DrawingPanel(WINDOW_SIZE1, WINDOW_SIZE2);
         Graphics g = panel.getGraphics();
         Graphics m = panel2.getGraphics();
         drawBoard1(g);
         drawBoard2(m);
+        // Asking for each location of each ship for player 1
         System.out.println("Hi Player 1");
         getShipsLoc1();
         setShipLoc(board1, xlocE1, xlocS1, ylocE1, ylocS1);
@@ -60,17 +71,19 @@ public class Main {
         getShipsLoc5();
         setShipLoc(board1, xlocE5, xlocS5, ylocE5, ylocS5);
 
+        // Initializing each ship into the ship class for player 1
          ship1 = new Ship(xlocS1,ylocS1,xlocE1,ylocE1,"Ship1",1);
          ship2 = new Ship(xlocS2,ylocS2,xlocE2,ylocE2,"Ship2",2);
          ship3 = new Ship(xlocS3,ylocS3,xlocE3,ylocE3,"Ship3",3);
          ship4 = new Ship(xlocS4,ylocS4,xlocE4,ylocE4,"Ship4",4);
          ship5 = new Ship(xlocS5,ylocS5,xlocE5,ylocE5,"Ship5",5);
 
+         // Creating a seperation wall so player 1 can't see the placements for player 2
         for (int c= 0; c<6; c++) {
             System.out.println("/////////////////");
         }
 
-
+        // Asking for each location of each ship for player 2
         System.out.println("Hi Player 2");
         getShipsLoc12();
         setShipLoc(board2, xlocE12, xlocS12, ylocE12, ylocS12);
@@ -83,12 +96,14 @@ public class Main {
         getShipsLoc52();
         setShipLoc(board2, xlocE52, xlocS52, ylocE52, ylocS52);
 
+        // Initializing each ship into the ship class for player 2
          ship12 = new Ship(xlocS12,ylocS12,xlocE12,ylocE12,"Ship12",6);
          ship22 = new Ship(xlocS22,ylocS22,xlocE22,ylocE22,"Ship22",7);
          ship32 = new Ship(xlocS32,ylocS32,xlocE32,ylocE32,"Ship32",8);
          ship42 = new Ship(xlocS42,ylocS42,xlocE42,ylocE42,"Ship42",9);
          ship52 = new Ship(xlocS52,ylocS52,xlocE52,ylocE52,"Ship52",10);
 
+         //Final seperation area before starting the actual game
         for (int c= 0; c<6; c++) {
             System.out.println("/////////////////");
         }
@@ -104,6 +119,7 @@ public class Main {
                 }
         );
 
+        // Flip the turn
         changeTurn();
 
     }
@@ -119,6 +135,8 @@ public class Main {
      * @return boolean
      */
     private static boolean isWinner(int turn, int[][] board) {
+        // Iterates through the rows and columns of the board to check for any remaining floating pieces then
+        // returns false if there are otherwise true
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == 1) {
@@ -129,6 +147,12 @@ public class Main {
         return true;
     }
 
+    /**
+     * Handles the click of the user to be able to allow for coordinates to be found and the correct shape drawn
+     * @param g : Graphics, which allows for us to call upon the graphics type to draw onto our board
+     * @param x : int, the x coordiante of our click
+     * @param y : int, the y coordinate of our click
+     */
     private static void handleClick1(Graphics g, int x, int y)
     //0 =empty; 1=floating piece; -1 = sunk, -2=miss
     {
@@ -168,6 +192,7 @@ public class Main {
             g.fillRect(xTop, yTop, BOX_SIZE, BOX_SIZE);
         }
 
+        // Check if there is a winner for either side to ensure accuracy
         if (isWinner(turn, board1) || isWinner(turn, board2)) {
             isGameOver = true;
             g.setColor(Color.WHITE);
@@ -177,6 +202,7 @@ public class Main {
             g.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
+        // Using the ship class if wanted by the player to find the position of one of their ships
         Scanner kb = new Scanner (System.in);
         System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
         if(kb.next().equals("y"))
@@ -186,6 +212,12 @@ public class Main {
 
 
     }
+    /**
+     * Handles the click of the user to be able to allow for coordinates to be found and the correct shape drawn
+     * @param m : Graphics, which allows for us to call upon the graphics type to draw onto our board
+     * @param x : int, the x coordiante of our click
+     * @param y : int, the y coordinate of our click
+     */
     private static void handleClick2(Graphics m, int x, int y)
     //0 =empty; 1=floating piece; -1 = sunk, -2=miss
     {
@@ -226,6 +258,7 @@ public class Main {
             m.fillRect(xTop, yTop, BOX_SIZE, BOX_SIZE);
         }
 
+        // Check if there is a winner for either side to ensure accuracy
         if (isWinner(turn, board1) || isWinner(turn, board2)) {
             isGameOver = true;
             m.setColor(Color.WHITE);
@@ -235,6 +268,7 @@ public class Main {
             m.drawString("Player " + turn + " is the winner!!!", 250, 670);
         }
 
+        // Using the ship class if wanted by the player to find the position of one of their ships
         Scanner kb = new Scanner (System.in);
         System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
         if(kb.next().equals("y"))
@@ -248,6 +282,7 @@ public class Main {
      * and from Player 1 to PLayer 2
      */
     private static void changeTurn() {
+       //If it is an odd turn making the turn for player 2 otherwise player 1
         if (moves % 2 + 1 == 1) {
             turn = p2Turn;
         } else {
@@ -262,6 +297,7 @@ public class Main {
      * @param g : Graphics
      */
     private static void drawBoard1(Graphics g) {
+        // Draw the horizontal lines for player 1's board
         g.drawLine(0, 0, 0, 600);
         g.drawLine(60, 0, 60, 600);
         g.drawLine(120, 0, 120, 600);
@@ -275,6 +311,7 @@ public class Main {
         g.drawLine(600, 0, 600, 600);
         g.drawLine(0, 0, 600, 0);
 
+        // Draw the vertical lines for player 1's board
         g.drawLine(0, 60, 600, 60);
         g.drawLine(0, 120, 600, 120);
         g.drawLine(0, 180, 600, 180);
@@ -294,6 +331,7 @@ public class Main {
      * @param m : Graphics
      */
     private static void drawBoard2(Graphics m) {
+        // Draw the horizontal lines for player 2's board
         m.drawLine(0, 0, 0, 600);
         m.drawLine(60, 0, 60, 600);
         m.drawLine(120, 0, 120, 600);
@@ -307,6 +345,7 @@ public class Main {
         m.drawLine(600, 0, 600, 600);
         m.drawLine(0, 0, 600, 0);
 
+        // Draw the vertical lines for player 2's board
         m.drawLine(0, 60, 600, 60);
         m.drawLine(0, 120, 600, 120);
         m.drawLine(0, 180, 600, 180);
@@ -321,29 +360,45 @@ public class Main {
     }
 
 
-
+    /**
+     * Sets the ships location on the board given the ending and starting coordinates of each start and end piece
+     * and building the ship
+     * @param board : int [][], allows us to set values on the board
+     * @param xlocE : int, denotes the x location of the end piece
+     * @param xlocS : int, denotes the x location of the start piece
+     * @param ylocE : int, denotes the y location of the end piece
+     * @param ylocS : int, denotes the y location of the start piece
+     */
     public static void setShipLoc(int board [][], int xlocE, int xlocS, int ylocE, int ylocS){
+        // Checks if vertical from bottom up and fills in board
         if (xlocS == xlocE && ylocE > ylocS) {
             for (int i = ylocS; i <= ylocE; i++) {
                 board[xlocE][i] = 1;
             }
-        } else if (xlocS == xlocE && ylocE < ylocS) {
+        }
+        else if (xlocS == xlocE && ylocE < ylocS) // Checks if vertical from top down and fills in board
+        {
             for (int i = ylocE; i <= ylocS; i++) {
                 board[xlocE][i] = 1;
             }
-        } else if (ylocS == ylocE && xlocE > xlocS) {
+        }
+        else if (ylocS == ylocE && xlocE > xlocS)  // Checks if horizontal and from right to left and fills in board
+        {
             for (int i = xlocS; i <= xlocE; i++) {
                 board[i][ylocE] = 1;
             }
-        } else if (ylocS == ylocE && xlocE < xlocS) {
+        }
+        else if (ylocS == ylocE && xlocE < xlocS) // Checks if horizontal and from left to right and fills in board
+        {
             for (int i = xlocE; i <= xlocS; i++) {
                 board[i][ylocE] = 1;
             }
         }
-        else if( xlocE == xlocS)
+        else if( xlocE == xlocS) // Checks if only one piece and all is equal
         {
             board[xlocS][ylocS] = 1;
         }
+        // Prints out the two array as a replica of the board
         for (int i = 0; i<board.length; i++) {
             for (int j=0; j<board.length; j++) {
                 System.out.print(board[i][j]+ " ");
@@ -352,8 +407,14 @@ public class Main {
         }
     }
 
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc1() {
         Scanner scan = new Scanner(System.in);
+       // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 1 of size 1.");
         System.out.println("Where you want to set your ship 1?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -368,8 +429,14 @@ public class Main {
     }
 
 
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc2() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 2 of size 2.");
         System.out.println("Where you want to set your ship 2?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -383,8 +450,14 @@ public class Main {
 
     }
 
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc3() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 3 of size 3.");
         System.out.println("Where you want to set your ship 3?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -398,8 +471,15 @@ public class Main {
 
 
     }
+
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc4() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 4 of size 4.");
         System.out.println("Where you want to set your ship 4?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -412,8 +492,15 @@ public class Main {
         ylocE4 = scan.nextInt() - 1;
 
     }
+
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc5() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 5 of size 5.");
         System.out.println("Where you want to set your ship 5?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -425,8 +512,15 @@ public class Main {
         System.out.println("and y coordinate");
         ylocE5 = scan.nextInt() - 1;
     }
+
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc12() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 1 of size 1.");
         System.out.println("Where you want to set your ship 1?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -439,9 +533,14 @@ public class Main {
         ylocE12 = scan.nextInt() - 1;
     }
 
-
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc22() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 2 of size 2.");
         System.out.println("Where you want to set your ship 2?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -454,8 +553,14 @@ public class Main {
         ylocE22 = scan.nextInt() - 1;
     }
 
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc32() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 3 of size 3.");
         System.out.println("Where you want to set your ship 3?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -468,8 +573,15 @@ public class Main {
         ylocE32 = scan.nextInt() - 1;
 
     }
+
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc42() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 4 of size 4.");
         System.out.println("Where you want to set your ship 4?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -481,8 +593,15 @@ public class Main {
         System.out.println("and y coordinate");
         ylocE42 = scan.nextInt() - 1;
     }
+
+    /**
+     * Asks the user for location and inputs each resulting input into variables to allow for transition into the
+     * ship class to allow for use in other methods
+     */
     public static void getShipsLoc52() {
         Scanner scan = new Scanner(System.in);
+        // Asks for the coordinates of the ship from the user and sets it to each appropriate variable for placing
+        // in the ship class
         System.out.println("Please create ship 5 of size 5.");
         System.out.println("Where you want to set your ship 5?");
         System.out.println("Please provide the x coordinate of the start point");
@@ -495,12 +614,18 @@ public class Main {
         ylocE52 = scan.nextInt() - 1;
     }
 
+    /**
+    Allows for the usage of the ship class and ensures that whatever ship wants to be checked can be seen in
+     another method
+     */
     public static void getPosition()
     {
         String answer;
         Scanner kb = new Scanner (System.in);
+        // Ask for user input on which ship they would like to check
         System.out.println("Which ship would you like to check? Please put the ship number. Player 1 your ships are 1-5 and Player 2 your ships are 6-10.");
         int n = kb.nextInt();
+        // if else ladder to check on the user input and assign the appropriate ship
         if (n == 1)
         {
             System.out.println(ship1.getLocation());
@@ -541,12 +666,16 @@ public class Main {
         {
             System.out.println(ship52.getLocation());
         }
+        // Allows for another instance in a row
         System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
         answer = kb.next();
-        while(answer.equalsIgnoreCase("y"))
+        while(answer.equalsIgnoreCase("y")) // Repeats to ask and obtain the
+            // same info while the user wants to use this option during the match
         {
+            // Ask for user input on which ship they would like to check
             System.out.println("Which ship would you like to check? Please put the ship number. Player 1 your ships are 1-5 and Player 2 your ships are 6-10.");
             n = kb.nextInt();
+            // if else ladder to check on the user input and assign the appropriate ship
             if (n == 1)
             {
                 System.out.println(ship1.getLocation());
@@ -591,9 +720,11 @@ public class Main {
             {
                 break;
             }
+            // Gives a break inbetween ships
             for (int c= 0; c<8; c++) {
                 System.out.println("/////////////////");
             }
+            // ALlows for repetition or to end the loop
             System.out.println("Would you like to be reminded of the location of any ship? (y/n)");
             answer = kb.next();
         }
